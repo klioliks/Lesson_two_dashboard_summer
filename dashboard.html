@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Семейный календарь каникул — планируйте встречи, заметки и летнее чтение" />
+  <title>Планировщик — Каникулы</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header__brand">
+        <a href="index.html" class="header__home" aria-label="На главную">←</a>
+        <span class="header__icon" aria-hidden="true">☀️</span>
+        <div>
+          <h1>Каникулы</h1>
+          <p class="header__subtitle">Семейный календарь и планировщик</p>
+        </div>
+      </div>
+      <div class="children-legend" id="childrenLegend"></div>
+    </header>
+
+    <section class="hero" aria-label="Обратный отсчёт до конца лета">
+      <div class="hero__content">
+        <p class="hero__label">До конца лета осталось</p>
+        <div class="hero__countdown" id="summerCountdown">
+          <div class="countdown-block">
+            <span class="countdown-block__value" id="daysLeft">—</span>
+            <span class="countdown-block__unit">дней</span>
+          </div>
+        </div>
+        <p class="hero__date" id="summerEndDate"></p>
+      </div>
+      <div class="hero__stats">
+        <div class="stat-card">
+          <span class="stat-card__value" id="currentHoliday">—</span>
+          <span class="stat-card__label">Текущий период</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__value" id="nextEvent">—</span>
+          <span class="stat-card__label">Ближайшая встреча</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__value" id="notesCount">0</span>
+          <span class="stat-card__label">Заметок</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="dashboard">
+      <section class="panel panel--calendar" aria-label="Календарь">
+        <div class="panel__header">
+          <button type="button" class="btn btn--ghost" id="prevMonth" aria-label="Предыдущий месяц">‹</button>
+          <h2 id="monthTitle">—</h2>
+          <button type="button" class="btn btn--ghost" id="nextMonth" aria-label="Следующий месяц">›</button>
+        </div>
+        <div class="calendar-legend">
+          <span><i class="dot dot--autumn"></i> Осенние</span>
+          <span><i class="dot dot--winter"></i> Зимние</span>
+          <span><i class="dot dot--spring"></i> Весенние</span>
+          <span><i class="dot dot--summer"></i> Летние</span>
+          <span><i class="dot dot--today"></i> Сегодня</span>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel panel--upcoming" aria-label="Ближайшие события">
+          <h2>Ближайшие встречи</h2>
+          <ul class="event-list" id="upcomingEvents"></ul>
+        </section>
+
+        <section class="panel panel--day" aria-label="Выбранный день">
+          <h2 id="selectedDayTitle">Выберите день</h2>
+          <p class="day-holiday" id="selectedDayHoliday"></p>
+
+          <div class="day-section">
+            <h3>Заметки</h3>
+            <form class="note-form" id="noteForm">
+              <select id="noteChild" aria-label="Ребёнок"></select>
+              <textarea id="noteText" rows="2" placeholder="Добавить заметку…" required></textarea>
+              <button type="submit" class="btn btn--primary">Сохранить</button>
+            </form>
+            <ul class="note-list" id="noteList"></ul>
+          </div>
+
+          <div class="day-section">
+            <h3>Встречи</h3>
+            <form class="meeting-form" id="meetingForm">
+              <select id="meetingChild" aria-label="Ребёнок"></select>
+              <input type="text" id="meetingTitle" placeholder="Название встречи" required />
+              <label class="checkbox-label">
+                <input type="checkbox" id="meetingAllDay" />
+                На весь день
+              </label>
+              <div class="meeting-form__row" id="meetingTimeRow">
+                <select id="meetingTime" aria-label="Время (24 часа)"></select>
+                <input type="number" id="meetingDuration" min="30" step="30" value="60" title="Длительность (мин)" />
+              </div>
+              <button type="submit" class="btn btn--primary">Добавить встречу</button>
+            </form>
+            <ul class="meeting-list" id="meetingList"></ul>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <section class="reading-section" aria-label="Летнее чтение">
+      <div class="reading-section__header">
+        <h2>📚 Летнее чтение</h2>
+        <p class="reading-section__subtitle">Списки литературы на каникулы</p>
+      </div>
+      <div class="reading-grid" id="readingGrid"></div>
+    </section>
+
+    <footer class="footer">
+      <p>Каникулы по рекомендованному графику РФ 2025–2026 · данные хранятся локально в браузере</p>
+      <button type="button" class="btn btn--ghost btn--small" id="editChildren">Имена детей</button>
+    </footer>
+  </div>
+
+  <dialog class="modal modal--wide" id="bookModal">
+    <form method="dialog" class="modal__content" id="bookForm">
+      <h2 id="bookModalTitle">Книга</h2>
+      <label>
+        Название
+        <input type="text" id="bookTitle" maxlength="120" required />
+      </label>
+      <label>
+        Автор
+        <input type="text" id="bookAuthor" maxlength="80" placeholder="Необязательно" />
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="bookRead" />
+        Прочитана
+      </label>
+      <label>
+        Основные герои
+        <textarea id="bookCharacters" rows="2" placeholder="Кто главные персонажи?"></textarea>
+      </label>
+      <label>
+        Содержание
+        <textarea id="bookSummary" rows="3" placeholder="О чём книга, кратко…"></textarea>
+      </label>
+      <fieldset class="like-fieldset">
+        <legend>Понравилась?</legend>
+        <div class="like-options">
+          <label class="like-option">
+            <input type="radio" name="bookLiked" value="yes" />
+            <span>👍 Да</span>
+          </label>
+          <label class="like-option">
+            <input type="radio" name="bookLiked" value="no" />
+            <span>👎 Нет</span>
+          </label>
+          <label class="like-option">
+            <input type="radio" name="bookLiked" value="" checked />
+            <span>— Пока не знаю</span>
+          </label>
+        </div>
+      </fieldset>
+      <div class="modal__actions">
+        <button type="button" class="btn btn--danger" id="deleteBook">Удалить</button>
+        <div class="modal__actions-right">
+          <button type="button" class="btn btn--ghost" id="cancelBook">Отмена</button>
+          <button type="submit" class="btn btn--primary">Сохранить</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="childrenModal">
+    <form method="dialog" class="modal__content" id="childrenForm">
+      <h2>Имена детей</h2>
+      <label>
+        Егор
+        <input type="text" id="child1Name" maxlength="30" />
+      </label>
+      <label>
+        Матвей
+        <input type="text" id="child2Name" maxlength="30" />
+      </label>
+      <div class="modal__actions">
+        <button type="button" class="btn btn--ghost" id="cancelChildren">Отмена</button>
+        <button type="submit" class="btn btn--primary">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Семейный календарь каникул — планируйте встречи, заметки и летнее чтение для детей" />
+  <title>Каникулы — семейный планировщик</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="landing.css" />
+</head>
+<body>
+  <div class="landing">
+    <nav class="landing-nav">
+      <a href="index.html" class="landing-nav__brand">
+        <span class="landing-nav__icon" aria-hidden="true">☀️</span>
+        Каникулы
+      </a>
+      <a href="dashboard.html" class="landing-nav__link">Открыть планировщик</a>
+    </nav>
+
+    <section class="landing-hero" aria-label="Приветствие">
+      <span class="landing-hero__badge">Учебный год 2025–2026</span>
+      <h1>Планируйте каникулы<br />вместе с семьёй</h1>
+      <p class="landing-hero__lead">
+        Календарь школьных каникул, заметки на каждый день, встречи для каждого ребёнка
+        и списки летнего чтения — всё в одном месте, прямо в браузере.
+      </p>
+      <p class="landing-hero__status" id="landingStatus">Загрузка…</p>
+      <a href="dashboard.html" class="landing-hero__cta">
+        Перейти к календарю →
+      </a>
+      <div class="landing-stats">
+        <div class="landing-stat">
+          <span class="landing-stat__value" id="landingDaysLeft">—</span>
+          <span class="landing-stat__label">дней до конца лета</span>
+        </div>
+        <div class="landing-stat">
+          <span class="landing-stat__value landing-stat__value--text" id="landingNextHoliday">—</span>
+          <span class="landing-stat__label">следующие каникулы</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-features" aria-label="Возможности">
+      <article class="landing-feature">
+        <div class="landing-feature__icon" aria-hidden="true">🗓️</div>
+        <h2>Календарь каникул</h2>
+        <p>Осенние, зимние, весенние и летние каникулы по графику РФ — сразу видно, когда отдых.</p>
+      </article>
+      <article class="landing-feature">
+        <div class="landing-feature__icon" aria-hidden="true">📝</div>
+        <h2>Заметки и встречи</h2>
+        <p>Добавляйте планы на каждый день отдельно для каждого ребёнка — секции, кружки, походы.</p>
+      </article>
+      <article class="landing-feature">
+        <div class="landing-feature__icon" aria-hidden="true">📚</div>
+        <h2>Летнее чтение</h2>
+        <p>Списки книг с отметками «прочитано», авторами и впечатлениями — у каждого свой столбец.</p>
+      </article>
+    </section>
+
+    <footer class="landing-footer">
+      <p>Данные сохраняются локально в браузере · регистрация не нужна</p>
+    </footer>
+  </div>
+
+  <script src="landing.js"></script>
+</body>
+</html>

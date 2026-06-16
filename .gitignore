@@ -1,0 +1,17 @@
+# OS и редакторы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Логи и временные файлы
+*.log
+npm-debug.log*
+
+# Зависимости (если установите serve локально)
+node_modules/

@@ -1,0 +1,17 @@
+{
+  "name": "kanikuly-planner",
+  "version": "1.0.0",
+  "description": "Семейный календарь школьных каникул с заметками, встречами и летним чтением",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve . -l 3000",
+    "dev": "npm run start"
+  },
+  "keywords": [
+    "calendar",
+    "school",
+    "holidays",
+    "family"
+  ],
+  "license": "MIT"
+}
