@@ -10,8 +10,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="landing.css" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem("kanikuly-theme");
+      var dark = saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      if (dark) document.documentElement.dataset.theme = "dark";
+    })();
+  </script>
 </head>
 <body>
+  <button type="button" class="lamp-toggle" id="themeToggle" aria-label="Переключить светлую и тёмную тему" aria-pressed="false">
+    <span class="lamp-toggle__fixture" aria-hidden="true">
+      <span class="lamp-toggle__shade"></span>
+      <span class="lamp-toggle__bulb"></span>
+      <span class="lamp-toggle__glow"></span>
+      <span class="lamp-toggle__cord-wrap">
+        <span class="lamp-toggle__cord"></span>
+        <span class="lamp-toggle__pull"></span>
+      </span>
+    </span>
+  </button>
+
   <div class="landing">
     <nav class="landing-nav">
       <a href="index.html" class="landing-nav__brand">
@@ -70,3 +89,4 @@
   <script src="landing.js"></script>
 </body>
 </html>
+
